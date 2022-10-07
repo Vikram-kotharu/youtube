@@ -3,10 +3,12 @@ import VideoItem from "../videoItem"
 
 const VideoLists = (props)=>{
 
-    const {videos} = props
+    const {videos,onVideoSelect} = props
+
+
     
     const rendered = videos.map(index=>{
-        return <VideoItem ans={index}/>
+        return <VideoItem onVideoSelect={onVideoSelect} ans={index}/>
     })
 
     return <>

@@ -3,9 +3,10 @@ import axios from 'axios'
 import {Component} from 'react'
 import SearchBar from '../searchBar'
 import VideoLists from '../videoList'
+import VideoDetail from '../videoDetail'
 class Home extends Component{
 
-    state = {apidata:[]}
+    state = {apidata:[],selectedVideos:null}
 
     ontype = async(formValue)=>{
         console.log(formValue)
@@ -17,15 +18,31 @@ class Home extends Component{
         this.setState({apidata:resp.data.items})
 
     }
+
+    onVideoSelect = (video) =>{
+        console.log(video)
+        this.setState({selectedVideos:video})
+
+    }
     render(){
         return(
             <>
             <div className="container">
                 <div className="search-bar ui segment shadow mt-3">
                 <SearchBar onSend={this.ontype}/>
-             I have total of {this.state.apidata.length} videos according to your search
+            
              <br/>
-             <VideoLists videos={this.state.apidata}/>
+
+             
+             <VideoDetail yvideo={this.state.selectedVideos} />
+             <VideoLists onVideoSelect={this.onVideoSelect} videos={this.state.apidata}/>
+
+             
+             
+             
+
+             
+             
                 </div>
              
             </div>
